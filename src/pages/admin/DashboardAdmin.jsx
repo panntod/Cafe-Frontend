@@ -11,14 +11,16 @@ function DashboardAdmin() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetchData()
+    fetchData();
   }, []);
 
-  const fetchData = async() => {
-    getMejas();
-    getMenus();
-    getUsers();
-  }
+  const fetchData = async () => {
+    try {
+      await Promise.all([getMejas(), getMenus(), getUsers()]);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   const getMejas = async () => {
     const dataMeja = await fetchAllMejas();
