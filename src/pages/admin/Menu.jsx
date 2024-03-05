@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import { useState, useEffect } from "react";
 import { Typography } from "@material-tailwind/react";
 import { imageURL, initialNewMenuState } from "../../config";
+import { toast, ToastContainer } from "react-toastify";
 import {
   addMenu,
   deleteMenu,
@@ -9,7 +10,12 @@ import {
   findMenu,
   updateMenu,
 } from "../../utils/Menu";
-import { NavbarLayout, CustomCard, CustomButton, SearchInput } from "../../components/index";
+import {
+  NavbarLayout,
+  CustomCard,
+  CustomButton,
+  SearchInput,
+} from "../../components/index";
 
 export default function Menu() {
   let [menus, setMenus] = useState([]);
@@ -63,39 +69,60 @@ export default function Menu() {
 
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure to delete this data?")) {
-      try {
-        const response = await deleteMenu(id);
-        alert(response);
-        fetchMenu();
-      } catch (error) {
-        console.error(error);
-      }
+      const response = await deleteMenu(id);
+      toast(response.message, {
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
+      fetchMenu();
     }
   };
 
   const handleSave = async (e) => {
     e.preventDefault();
+    const toastID = toast.loading("Loading...");
 
     let data = new FormData();
-    data.append("nama_menu", newMenu.nama_menu);
-    data.append("jenis", newMenu.jenis);
-    data.append("harga", newMenu.harga);
-    data.append("deskripsi", newMenu.deskripsi);
-    data.append("gambar", newMenu.gambar);
+    data.append("nama_menu", newMenu?.nama_menu);
+    data.append("jenis", newMenu?.jenis);
+    data.append("harga", newMenu?.harga);
+    data.append("deskripsi", newMenu?.deskripsi);
+    data.append("gambar", newMenu?.gambar);
 
     if (action === "add") {
-      try {
-        const response = await addMenu(data);
-        alert(response);
-      } catch (error) {
-        alert(error);
+      const response = await addMenu(data);
+      if (response.success == true) {
+        toast.update(toastID, {
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+          render: response.message,
+        });
+      } else {
+        toast.update(toastID, {
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+          render: "Terjadi Kesalahan",
+        });
       }
     } else if (action === "edit") {
-      try {
-        const response = await updateMenu(newMenu.id, data);
-        alert(response);
-      } catch (error) {
-        alert(error);
+      const response = await updateMenu(newMenu.id, data);
+      if (response.success == true) {
+        toast.update(toastID, {
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+          render: response.message,
+        });
+      } else {
+        toast.update(toastID, {
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+          render: "Terjadi Kesalahan",
+        });
       }
     }
 
@@ -112,6 +139,7 @@ export default function Menu() {
 
   return (
     <NavbarLayout>
+      <ToastContainer />
       <div className="mx-4 sm:p-4 lg:mx-32">
         <div className="w-full">
           <Typography variant="h1" color="blue" textGradient>
@@ -233,8 +261,8 @@ export default function Menu() {
                     }
                     required
                   >
-                    <option value="Jenis">
-                      {newMenu.jenis !== "" ? newMenu.jenis : "~Choose~"}
+                    <option value="" disabled hidden>
+                      ~Choose~
                     </option>
                     <option value="makanan">Makanan</option>
                     <option value="minuman">Minuman</option>

@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import { useState, useEffect } from "react";
 import { Typography } from "@material-tailwind/react";
 import { initialNewMejaState } from "../../config";
+import { toast, ToastContainer } from "react-toastify";
 import {
   NavbarLayout,
   CustomButton,
@@ -63,18 +64,19 @@ export default function Meja() {
 
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure to delete this data?")) {
-      try {
-        const response = await deleteMeja(id);
-        alert(response);
-        fetchMeja();
-      } catch (error) {
-        alert(error);
-      }
+      const response = await deleteMeja(id);
+      toast(response.message, {
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
+      fetchMeja();
     }
   };
 
   const handleSave = async (e) => {
     e.preventDefault();
+    const toastID = toast.loading("Loading...");
 
     const data = {
       nomor_meja: newMeja.nomor_meja,
@@ -82,16 +84,39 @@ export default function Meja() {
     };
 
     if (action === "add") {
-      try {
-        await addMeja(data);
-      } catch (error) {
-        alert(error);
+      const response = await addMeja(data);
+      if (response.success == true) {
+        toast.update(toastID, {
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+          render: response.message,
+        });
+      } else {
+        toast.update(toastID, {
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+          render: "Terjadi Kesalahan",
+        });
       }
     } else if (action === "edit") {
-      try {
-        await updateMeja(newMeja.id, data);
-      } catch (error) {
-        alert(error);
+      const response = await updateMeja(newMeja.id, data);
+      console.log(response);
+      if (response.success === false) {
+        toast.update(toastID, {
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+          render: "Terjadi Kesalahan",
+        });
+      } else {
+        toast.update(toastID, {
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+          render: response.message,
+        });
       }
     }
 
@@ -102,6 +127,7 @@ export default function Meja() {
 
   return (
     <NavbarLayout>
+      <ToastContainer />
       <div className="mx-32 sm:p-4">
         <div className="w-full">
           <Typography variant="h1" color="blue" textGradient>
@@ -195,7 +221,7 @@ export default function Meja() {
               <div className="mb-3">
                 <label className="text-sm text-gray-800">Nomor Meja</label>
                 <input
-                  type="text"
+                  type="number"
                   className="block w-full px-4 py-2 text-sm text-gray-700 bg-white border border-gray-400 rounded-md focus:border-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   onChange={(e) =>
                     setnewMeja({

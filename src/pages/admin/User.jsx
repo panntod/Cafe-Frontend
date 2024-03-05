@@ -1,6 +1,7 @@
 import Modal from "react-modal";
 import { useState, useEffect } from "react";
 import { Typography } from "@material-tailwind/react";
+import { toast, ToastContainer } from "react-toastify";
 import {
   CustomButton,
   NavbarLayout,
@@ -48,11 +49,42 @@ export default function User() {
 
   const handleSave = async (e) => {
     e.preventDefault();
+    const toastID = toast.loading("Loading...");
 
     if (action === "add") {
-      await addUsers(newUser);
+      const response = await addUsers(newUser);
+      if (response.success == true) {
+        toast.update(toastID, {
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+          render: response.message,
+        });
+      } else {
+        toast.update(toastID, {
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+          render: "Terjadi Kesalahan",
+        });
+      }
     } else {
-      await updateUsers(idUser, newUser);
+      const response = await updateUsers(idUser, newUser);
+      if (response.success == true) {
+        toast.update(toastID, {
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+          render: response.message,
+        });
+      } else {
+        toast.update(toastID, {
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+          render: "Terjadi Kesalahan",
+        });
+      }
     }
 
     setModalIsOpen(false);
@@ -78,19 +110,19 @@ export default function User() {
 
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure to delete this data?")) {
-      try {
-        const response = await deleteUsers(id);
-        alert(response);
-      } catch (error) {
-        console.error(error);
-        alert("Error deleting user");
-      }
+      const response = await deleteUsers(id);
+      toast(response.message, {
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
       fetchUser();
     }
   };
 
   return (
     <NavbarLayout>
+      <ToastContainer />
       <div className="mx-32 sm:p-4">
         <div className="w-full">
           <Typography variant="h1" color="blue" textGradient>
