@@ -27,7 +27,7 @@ export const findMenu = async (keyword) => {
 export const addMenu = async (data) => {
   try {
     const response = await axios.post(baseURL + "/menu/addMenu", data, config);
-    return response.data.message;
+    return response.data;
   } catch (error) {
     return handleApiError(error);
   }
@@ -36,7 +36,7 @@ export const addMenu = async (data) => {
 export const updateMenu = async (id, data) => {
   try {
     const response = await axios.put(baseURL + "/menu/" + id, data, config);
-    return response.data.message;
+    return response.data;
   } catch (error) {
     return handleApiError(error);
   }
@@ -45,7 +45,7 @@ export const updateMenu = async (id, data) => {
 export const deleteMenu = async (id) => {
   try {
     const response = await axios.delete(baseURL + "/menu/" + id, config);
-    return response.data.message;
+    return response.data;
   } catch (error) {
     return handleApiError(error);
   }

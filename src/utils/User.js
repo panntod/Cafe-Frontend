@@ -1,6 +1,6 @@
 import axios from "axios";
 import { config, baseURL } from "../config";
-import { handleApiError } from "../helpers/Response"
+import { handleApiError } from "../helpers/Response";
 
 export const fetchAllUsers = async () => {
   try {
@@ -27,7 +27,7 @@ export const findUser = async (keyword) => {
 export const addUsers = async (data) => {
   try {
     const response = await axios.post(baseURL + "/user/addUser", data, config);
-    alert(response.data.message);
+    return response.data;
   } catch (error) {
     return handleApiError(error);
   }
@@ -36,7 +36,7 @@ export const addUsers = async (data) => {
 export const updateUsers = async (id, data) => {
   try {
     const response = await axios.put(baseURL + `/user/${id}`, data, config);
-    alert(response.data.message);
+    return response.data;
   } catch (error) {
     return handleApiError(error);
   }
@@ -44,7 +44,8 @@ export const updateUsers = async (id, data) => {
 
 export const deleteUsers = async (userId) => {
   try {
-    await axios.delete(baseURL + "/user/" + userId, config);
+    const response = await axios.delete(baseURL + "/user/" + userId, config);
+    return response.data
   } catch (error) {
     return handleApiError(error);
   }

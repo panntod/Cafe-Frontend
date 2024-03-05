@@ -27,7 +27,7 @@ export const findMejas = async (keyword) => {
 export const addMeja = async (data) => {
   try {
     const response = await axios.post(baseURL + "/meja/addMeja", data, config);
-    alert(response.data.message);
+    return response.data
   } catch (error) {
     return handleApiError(error);
   }
@@ -36,7 +36,7 @@ export const addMeja = async (data) => {
 export const updateMeja = async (id, data) => {
   try {
     const response = await axios.put(baseURL + `/meja/${id}`, data, config);
-    alert(response.data.message);
+    return response.data
   } catch (error) {
     return handleApiError(error);
   }
@@ -44,7 +44,8 @@ export const updateMeja = async (id, data) => {
 
 export const deleteMeja = async (MejaId) => {
   try {
-    return await axios.delete(baseURL + "/meja/" + MejaId, config);
+    const response = await axios.delete(baseURL + "/meja/" + MejaId, config);
+    return response.data
   } catch (error) {
     return handleApiError(error);
   }
