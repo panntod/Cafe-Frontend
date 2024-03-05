@@ -6,8 +6,7 @@ export const handleApiError = (error) => {
     if (status === 403) {
       window.location.href = "/forbidden";
     } else if (status === 401) {
-      AuthHelper.ClearAuth();
-      window.location.href = "/";
+      window.location.href = "/notFound";
     }
   }
 
