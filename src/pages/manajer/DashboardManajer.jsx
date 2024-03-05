@@ -11,18 +11,17 @@ function DashboardManajer() {
   const [menus, setMenus] = useState("");
   const [user, setUser] = useState("");
   const [menuLaris, setMenuLaris] = useState([]);
-  // const [menuJarang, setMenuJarang] = useState([]);
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    getMejas();
-    getMenus();
-    getUser();
-    getMenuLaris();
-    // getMenuJarang();
+    try {
+      await Promise.all([getMejas(), getMenus(), getUser(), getMenuLaris()]);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   const getMejas = async () => {
