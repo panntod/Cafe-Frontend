@@ -1,9 +1,11 @@
-const myToken = localStorage.getItem("token");
 export const baseURL = "http://localhost:8000";
 export const imageURL = baseURL + "/gambar/";
 
-export const config = {
-  headers: { Authorization: `Bearer ${myToken}` },
+export const config = () => {
+  const myToken = localStorage.getItem("token");
+  return {
+    headers: { Authorization: `Bearer ${myToken}` },
+  };
 };
 
 export const initialNewMenuState = {
