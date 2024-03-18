@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { baseURL } from "../config";
 import loginImg from "../assets/login.jpg";
 import AuthHelper from "../helpers/AuthHelper";

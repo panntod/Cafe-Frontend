@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Datepicker, Input, initTE } from "tw-elements";
 initTE({ Datepicker, Input }, { allowReinits: true });
 import { CustomButton, NavbarLayout } from "../../components/index";

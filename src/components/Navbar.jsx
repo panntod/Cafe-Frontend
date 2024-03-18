@@ -1,4 +1,3 @@
-import React from "react";
 import NavbarAdmin from "./Navbar/NavbarAdmin";
 import NavbarKasir from "./Navbar/NavbarKasir";
 import NavbarManajer from "./Navbar/NavbarManajer";

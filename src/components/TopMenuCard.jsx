@@ -1,5 +1,3 @@
-// TopMenuCard.js
-import React from "react";
 import { imageURL } from "../config";
 
 const TopMenuCard = ({ menu }) => {

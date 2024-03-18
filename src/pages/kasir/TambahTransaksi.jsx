@@ -1,5 +1,5 @@
 import Select from "react-select";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { NavbarLayout, CustomButton } from "../../components/index";
 import { fetchAllMenu } from "../../utils/Menu";

@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoMenuSharp } from "react-icons/io5";
 import { Button } from "@material-tailwind/react";

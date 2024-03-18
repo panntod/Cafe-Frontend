@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import React from "react";
 import { NavbarLayout, TopMenuCard } from "../../components/index";
 import { fetchAllMejas } from "../../utils/Meja";
 import { fetchAllMenu } from "../../utils/Menu";
