@@ -41,7 +41,7 @@ function TambahTransaksi() {
 
   const handleAddToCart = (id_menu, qty) => {
     const existingItem = detailTransaksi.find(
-      (item) => item.id_menu === id_menu
+      (item) => item.id_menu === id_menu,
     );
 
     if (existingItem) {
@@ -57,7 +57,7 @@ function TambahTransaksi() {
       }
 
       const updatedTransaksi = detailTransaksi.map((item) =>
-        item.id_menu === id_menu ? updatedItem : item
+        item.id_menu === id_menu ? updatedItem : item,
       );
       setDetailTransaksi(updatedTransaksi);
     } else {
@@ -73,7 +73,7 @@ function TambahTransaksi() {
     try {
       // Filter detailTransaksi untuk menyertakan hanya item dengan qty yang lebih besar dari 0
       const filteredDetailTransaksi = detailTransaksi.filter(
-        (item) => item.qty > 0
+        (item) => item.qty > 0,
       );
 
       if (filteredDetailTransaksi.length === 0) {
@@ -87,7 +87,7 @@ function TambahTransaksi() {
         id_meja: idMeja.value,
         nama_pelanggan: namaPelanggan,
         status: status.value,
-        detail_transaksi: filteredDetailTransaksi, 
+        detail_transaksi: filteredDetailTransaksi,
       };
 
       const response = await addTransaksi(transaksiData);
@@ -206,14 +206,14 @@ function TambahTransaksi() {
                       <td className="text-center p-3 px-5">
                         <p>
                           {detailTransaksi.find(
-                            (item) => item.id_menu === menu.id
+                            (item) => item.id_menu === menu.id,
                           )?.qty || 0}
                         </p>
                       </td>
                       <td className="p-3 px-2 text-center">
                         {menu.harga *
                           (detailTransaksi.find(
-                            (item) => item.id_menu === menu.id
+                            (item) => item.id_menu === menu.id,
                           )?.qty || 0)}
                       </td>
                       <td className="p-3 px-5 text-center" required>
@@ -223,7 +223,7 @@ function TambahTransaksi() {
                           color="red"
                           disabled={
                             detailTransaksi.find(
-                              (item) => item.id_menu === menu.id
+                              (item) => item.id_menu === menu.id,
                             )?.qty <= 0
                           }
                         >

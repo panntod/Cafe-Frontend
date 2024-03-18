@@ -16,7 +16,7 @@ export const findUser = async (keyword) => {
     const response = await axios.post(
       baseURL + "/user/find",
       { keyword },
-      config()
+      config(),
     );
     return response.data.data;
   } catch (error) {
@@ -26,7 +26,11 @@ export const findUser = async (keyword) => {
 
 export const addUsers = async (data) => {
   try {
-    const response = await axios.post(baseURL + "/user/addUser", data, config());
+    const response = await axios.post(
+      baseURL + "/user/addUser",
+      data,
+      config(),
+    );
     return response.data;
   } catch (error) {
     return handleApiError(error);
@@ -45,7 +49,7 @@ export const updateUsers = async (id, data) => {
 export const deleteUsers = async (userId) => {
   try {
     const response = await axios.delete(baseURL + "/user/" + userId, config());
-    return response.data
+    return response.data;
   } catch (error) {
     return handleApiError(error);
   }

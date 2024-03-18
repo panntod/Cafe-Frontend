@@ -5,7 +5,7 @@ const SetAuth = (data) => {
   const tokenString = data.token;
 
   localStorage.setItem("logged", "true");
-  localStorage.setItem("nama_user",namaString );
+  localStorage.setItem("nama_user", namaString);
   localStorage.setItem("id_user", idString);
   localStorage.setItem("role", roleString);
   localStorage.setItem("token", tokenString);
@@ -29,6 +29,6 @@ const ClearAuth = () => {
   localStorage.removeItem("id_user");
   localStorage.removeItem("token");
   localStorage.clear();
-}
+};
 
 export default { SetAuth, GetRole, ClearAuth };

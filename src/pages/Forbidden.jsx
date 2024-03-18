@@ -6,7 +6,7 @@ export const Forbidden = () => {
   };
 
   const handleBackHome = () => {
-    const role = JSON.parse(localStorage.getItem("role"))
+    const role = JSON.parse(localStorage.getItem("role"));
     window.location.href = `/${role}`;
   };
 

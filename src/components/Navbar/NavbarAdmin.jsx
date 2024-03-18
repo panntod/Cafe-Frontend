@@ -2,14 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { IoMenuSharp } from "react-icons/io5";
 import { Button } from "@material-tailwind/react";
 import AuthHelper from "../../helpers/AuthHelper";
-import logo from "../../assets/logo.png"
+import logo from "../../assets/logo.png";
 
 export default function NavbarAdmin() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
     // Hapus data dari localStorage
-    AuthHelper.ClearAuth()
+    AuthHelper.ClearAuth();
     // Navigasi ke halaman login
     navigate("/");
   };
@@ -17,23 +17,19 @@ export default function NavbarAdmin() {
   const MenuNavbar = (e) => {
     const list = document.querySelector("ul");
     const isOpen = e.target.name === "menuNavbar";
-  
+
     e.target.name = isOpen ? "close" : "menuNavbar";
-  
+
     list.classList.toggle("top-[60px]", isOpen);
     list.classList.toggle("opacity-100", isOpen);
     list.classList.toggle("z-10", isOpen);
-  };  
+  };
 
   return (
     <nav className="p-5 bg-gray-800 shadow-md md:flex md:items-center md:justify-between">
       <div className="flex justify-between items-center">
         <span className="text-2xl font-[Poppins] cursor-pointer">
-          <img
-            className="h-10 inline z-1"
-            src={logo}
-            alt="Pan Cafe"
-          />
+          <img className="h-10 inline z-1" src={logo} alt="Pan Cafe" />
         </span>
         <span className="text-2xl font-[Poppins] cursor-pointer ml-5 text-white">
           Pan Cafe

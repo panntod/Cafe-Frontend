@@ -7,7 +7,7 @@ const CustomButton = ({
   loading,
   onClick,
   color,
-  type
+  type,
 }) => {
   return (
     <Button
@@ -24,4 +24,4 @@ const CustomButton = ({
   );
 };
 
-export default CustomButton
+export default CustomButton;

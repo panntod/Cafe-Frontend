@@ -26,4 +26,4 @@ function CustomAlert({ message }) {
   );
 }
 
-export default CustomAlert
+export default CustomAlert;

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { baseURL, config } from "../config";
-import { handleApiError } from "../helpers/Response"
+import { handleApiError } from "../helpers/Response";
 
 export const fetchAllMenu = async () => {
   try {
@@ -16,7 +16,7 @@ export const findMenu = async (keyword) => {
     const response = await axios.post(
       baseURL + "/menu/find",
       { keyword: keyword },
-      config()
+      config(),
     );
     return response.data.data;
   } catch (error) {
@@ -26,7 +26,11 @@ export const findMenu = async (keyword) => {
 
 export const addMenu = async (data) => {
   try {
-    const response = await axios.post(baseURL + "/menu/addMenu", data, config());
+    const response = await axios.post(
+      baseURL + "/menu/addMenu",
+      data,
+      config(),
+    );
     return response.data;
   } catch (error) {
     return handleApiError(error);

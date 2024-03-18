@@ -1,12 +1,15 @@
 import axios from "axios";
 import { baseURL, config } from "../config";
-import { handleApiError } from "../helpers/Response"
+import { handleApiError } from "../helpers/Response";
 
 export const fetchTransaksiKasir = async () => {
   let idUser = localStorage.getItem("id_user");
 
   try {
-    const response = await axios.get(baseURL + `/transaksi/find/${idUser}`, config());
+    const response = await axios.get(
+      baseURL + `/transaksi/find/${idUser}`,
+      config(),
+    );
     return response.data.data;
   } catch (error) {
     return handleApiError(error);
@@ -17,7 +20,7 @@ export const fetchAllTransaksi = async () => {
   try {
     const response = await axios.get(
       baseURL + "/transaksi/getTransaksi",
-      config()
+      config(),
     );
     return response.data.data;
   } catch (error) {
@@ -30,7 +33,7 @@ export const addTransaksi = async (data) => {
     const response = await axios.post(
       baseURL + "/transaksi/addTransaksi",
       data,
-      config()
+      config(),
     );
     return response;
   } catch (error) {
@@ -43,7 +46,7 @@ export const updateTransaksi = async (id, data) => {
     const response = await axios.put(
       baseURL + "/transaksi/updateStatus/" + id,
       data,
-      config()
+      config(),
     );
     return response;
   } catch (error) {
@@ -56,7 +59,7 @@ export const findTransaksi = async (seacrh) => {
     const response = await axios.post(
       baseURL + "/transaksi/find",
       { keyword: seacrh },
-      config()
+      config(),
     );
     return response.data.data;
   } catch (error) {
@@ -72,7 +75,7 @@ export const filterTransaksi = async (startDate, endDate) => {
         startDate,
         endDate,
       },
-      config()
+      config(),
     );
     return response.data.data;
   } catch (error) {
@@ -84,7 +87,7 @@ export const topSellingMenu = async () => {
   try {
     const response = await axios.get(
       baseURL + "/transaksi/topSellingMenu",
-      config()
+      config(),
     );
     return response.data.data;
   } catch (error) {

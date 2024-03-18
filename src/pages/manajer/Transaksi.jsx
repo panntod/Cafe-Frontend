@@ -7,7 +7,7 @@ import {
 import {
   deleteTransaksi,
   fetchAllTransaksi,
-  findTransaksi
+  findTransaksi,
 } from "../../utils/Transaksi";
 
 // DAFTAR TRANSAKSI
@@ -119,7 +119,7 @@ const Transaksi = () => {
                   <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {new Intl.DateTimeFormat("id-ID").format(
-                      new Date(transaksiItem.tgl_transaksi)
+                      new Date(transaksiItem.tgl_transaksi),
                     )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -146,8 +146,8 @@ const Transaksi = () => {
                       transaksiItem.detail_transaksi.reduce(
                         (total, detailItem) =>
                           total + detailItem.menu.harga * detailItem.qty,
-                        0
-                      )
+                        0,
+                      ),
                     )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">

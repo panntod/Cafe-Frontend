@@ -18,13 +18,13 @@ const Laporan = () => {
     try {
       const dataTransaksi = await fetchAllTransaksi();
       setTransaksi(dataTransaksi);
-      
+
       let tempTransaksi = [...dataTransaksi];
       let total = 0;
       for (let index = 0; index < tempTransaksi.length; index++) {
         total += tempTransaksi[index].detail_transaksi.reduce(
           (total, detailItem) => total + detailItem.menu.harga * detailItem.qty,
-          0
+          0,
         );
       }
       setTotalPendapatan(total);
@@ -44,7 +44,7 @@ const Laporan = () => {
       for (let index = 0; index < tempTransaksi.length; index++) {
         total += tempTransaksi[index].detail_transaksi.reduce(
           (total, detailItem) => total + detailItem.menu.harga * detailItem.qty,
-          0
+          0,
         );
       }
 
@@ -115,7 +115,7 @@ const Laporan = () => {
                   <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {new Intl.DateTimeFormat("id-ID").format(
-                      new Date(transaksiItem.tgl_transaksi)
+                      new Date(transaksiItem.tgl_transaksi),
                     )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -142,8 +142,8 @@ const Laporan = () => {
                       transaksiItem.detail_transaksi.reduce(
                         (total, detailItem) =>
                           total + detailItem.menu.harga * detailItem.qty,
-                        0
-                      )
+                        0,
+                      ),
                     )}
                   </td>
                 </tr>
@@ -154,7 +154,8 @@ const Laporan = () => {
 
         <div className="flex justify-between">
           <h1 className="font-medium text-2xl text-center">
-            TOTAL PENDAPATAN Rp <span className="text-blue-600 font-bold">{totalPendapatan}</span>
+            TOTAL PENDAPATAN Rp{" "}
+            <span className="text-blue-600 font-bold">{totalPendapatan}</span>
           </h1>
           <div>
             <div className="flex gap-2">

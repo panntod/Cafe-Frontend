@@ -7,7 +7,7 @@ const NotFoundPage = () => {
 
   const handleBackHome = () => {
     const role = JSON.parse(localStorage.getItem("role"));
-    role ? window.location.href = `/${role}` : window.location.href = "/"
+    role ? (window.location.href = `/${role}`) : (window.location.href = "/");
   };
   return (
     <section className="bg-white dark:bg-gray-900 ">
