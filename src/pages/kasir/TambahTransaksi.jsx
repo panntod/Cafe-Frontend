@@ -87,10 +87,8 @@ function TambahTransaksi() {
         id_meja: idMeja.value,
         nama_pelanggan: namaPelanggan,
         status: status.value,
-        detail_transaksi: filteredDetailTransaksi, // Gunakan detailTransaksi yang sudah difilter
+        detail_transaksi: filteredDetailTransaksi, 
       };
-
-      console.log(transaksiData);
 
       const response = await addTransaksi(transaksiData);
 
